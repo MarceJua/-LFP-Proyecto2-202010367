@@ -74,7 +74,7 @@ class Interfaz:
         while actual!=None:
             count+=1
             tabla.insert('',END,text=count, values=(actual.dato.Token,actual.dato.Lexema))
-            print(actual.dato.Token+ '----------->' +actual.dato.Lexema)
+            print(actual.dato.Token+ '     >    ' +actual.dato.Lexema)
             actual = actual.siguiente
 
     def TablaErrores(self):
