@@ -33,7 +33,8 @@ class Interfaz:
         # Botón Analizar
         Analizar = Button(self.pantalla_principal, text='Analizar', font=('Helvetica', 12), command=self.analizar)
         Analizar.place(x=575, y=250)
-    #//////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    #/
     def menu(self):
         self.menu1 = Menu(self.pantalla_principal)
         self.menu1.config(bg='#f0f0f0')
@@ -75,7 +76,7 @@ class Interfaz:
         while actual!=None:
             count+=1
             tabla.insert('',END,text=count, values=(actual.dato.Token,actual.dato.Lexema))
-            print(actual.dato.Token+ '     >    ' +actual.dato.Lexema)
+            print(actual.dato.Token+ '     ->    ' +actual.dato.Lexema)
             actual = actual.siguiente
 
     def TablaErrores(self):
@@ -100,7 +101,9 @@ class Interfaz:
         while actual!= None:
             tabla.insert('',END,text=actual.dato.tipo, values=(actual.dato.linea, actual.dato.columna,actual.dato.token, actual.dato.descripcion))
             actual = actual.siguiente
-    #///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    #/
+    
     def analizar(self):
         self.compilar = Sintactico() #
         self.compilar.compila(self.texto_izquierdo.get(1.0,END))
@@ -150,4 +153,4 @@ class Interfaz:
             nuevo_Archivo.close()
 
 
-gui = Interfaz()
+inter = Interfaz()
