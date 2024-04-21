@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter.filedialog import askopenfilename, asksaveasfile
 import tkinter.messagebox
 from ttkthemes import ThemedStyle
+from AnalizadorSintactico import *
 
 class Interfaz:
     def __init__(self):
@@ -101,11 +102,14 @@ class Interfaz:
             actual = actual.siguiente
     #///////////////////////////////////////////////////////////////////////////////////////////////////////////
     def analizar(self):
+        self.compilar = Sintactico() #
         self.compilar.compila(self.texto_izquierdo.get(1.0,END))
         if self.compilar.compilar.lista_errores.tamaño > 0 or self.compilar.compilar.lista_errores.tamaño==0:
-
+            #self.compilar.Sintactico()
             self.texto_derecho.delete(1.0,[END])
             self.texto_derecho.insert(1.0,self.compilar.doc)
+            
+        self.compilar.lista.imprimir()
 
     def obtener(self):
         self.texto_derecho.delete(1.0, [END])
