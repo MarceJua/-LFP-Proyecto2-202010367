@@ -295,7 +295,7 @@ class Analizador:
                     string+=char
             count+=1
 
-    '''
+    """
 
     def StringJason(self, text):
         json = ''
@@ -318,10 +318,7 @@ class Analizador:
                         if char!='\t':
                             json+=char
             count+=1    
-    '''
-
-
-            
+   """    
     def tokensReconocidos(self, lexema):
         for i in self.tokens:
             if lexema == self.tokens[i]:

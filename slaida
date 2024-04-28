@@ -21,3 +21,4 @@ BuscarTodo todo = nueva BuscarTodo ("literaturas");
 
 --- BUSCAR UN DATO POR COLECCION
 BuscarUnico todo = nueva BuscarUnico ("literaturas");
+

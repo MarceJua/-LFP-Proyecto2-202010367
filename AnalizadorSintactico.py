@@ -3,7 +3,7 @@ from ErrorLex import Error
 
 class Sintactico:
     def __init__(self) -> None:
-        
+        self.lista = []
         comillas = ['\'','\"']
         self.CrearBD = ['CrearBD','RID','=' ,'nueva', 'CrearBD','(',')',';']
         self.EliminarBD = ['EliminarBD','RID','=','nueva','EliminarBD','(',comillas,'STRING',comillas,')',';']
@@ -67,8 +67,6 @@ class Sintactico:
                 break
             k+=1
                 
-
-
     def Eliminar(self,i):
         k = i
         aceptar = 0

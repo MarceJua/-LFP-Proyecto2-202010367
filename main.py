@@ -8,31 +8,36 @@ from AnalizadorSintactico import *
 class Interfaz:
     def __init__(self):
         self.pantalla_principal = Tk()
-        self.pantalla_principal.geometry('1300x650')
-        self.pantalla_principal.config(bg='#f0f0f0')  #color de fondo
+        self.pantalla_principal.geometry('1100x600')
+        self.pantalla_principal.title("Analizador")
+        self.pantalla_principal.config(bg='#f0f0f0')
         style = ThemedStyle(self.pantalla_principal)
-        style.set_theme("arc")  # tema de estilo "arc"
+        style.set_theme("arc")
         self.componenentes()
         self.menu()
         
+        self.archivo_abierto = None
         self.pantalla_principal.mainloop()
 
     def componenentes(self):
-        # Texto derecho
+        encabezado = Label(self.pantalla_principal, text="LFP - Proyecto 2", font=('Helvetica', 20), bg='#f0f0f0')
+        encabezado.place(x=500, y=30)
+
+        # cuadro de texto derecho
         self.texto_derecho = Text(self.pantalla_principal)
-        self.texto_derecho.config(height=20, width=48, bg='#ffffff', border=0, fg='#000000', 
+        self.texto_derecho.config(height=25, width=50, bg='#FFFACD', border=0, fg='#000000', 
                                   insertbackground='black', font=('Helvetica',12), padx=11)
-        self.texto_derecho.place(x=725,y=120)
+        self.texto_derecho.place(x=600,y=90)
         
-        # Texto izquierdo
+        # cuadro de texto izquierdo
         self.texto_izquierdo = Text(self.pantalla_principal)
-        self.texto_izquierdo.config(height=20, width=45, bg='#ffffff', border=0, fg='#000000',
+        self.texto_izquierdo.config(height=25, width=50, bg='#FFFACD', border=0, fg='#000000',
                                insertbackground='black', font=('Helvetica', 12), padx=11, wrap='word')
-        self.texto_izquierdo.place(x=50,y=120)           
+        self.texto_izquierdo.place(x=100,y=90)           
         
-        # Botón Analizar
-        Analizar = Button(self.pantalla_principal, text='Analizar', font=('Helvetica', 12), command=self.analizar)
-        Analizar.place(x=575, y=250)
+        Analizar = Button(self.pantalla_principal, text='Analizar', font=('Helvetica', 12), command=self.analizar,
+                      bg='#FFFACD', fg='black') 
+        Analizar.place(x=20, y=90)
     
     #/
     def menu(self):
@@ -40,18 +45,19 @@ class Interfaz:
         self.menu1.config(bg='#f0f0f0')
         #--------------------------------------------
         self.filemenu = Menu(self.menu1, tearoff=0)
-        self.filemenu.add_command(label='Nuevo')
+        self.filemenu.add_command(label='Nuevo', command=self.Nuevo)
         self.filemenu.add_command(label='Abrir', command=self.Abrir)
         self.filemenu.add_command(label='Guardar', command=self.Guardar)
-        self.filemenu.add_command(label='Guardar Como')
+        self.filemenu.add_command(label='Guardar Como', command=self.GuardarComo)
         self.filemenu.add_command(label='Salir', command=self.Salir)
         #--------------------------------------------
+        self.ayuda_menu = Menu(self.menu1, tearoff=0)
 
         opcion1 = self.menu1.add_cascade(label='Archivo', menu=self.filemenu)
-        #opcion2 = self.menu1.add_cascade(label='Análisis')
         opcion3 = self.menu1.add_command(label='Tokens', command=self.TablaTokens)
         opcion4 = self.menu1.add_command(label='Errores', command=self.TablaErrores)
-        
+        #opcion5 = self.menu1.add_cascade(label='Ayuda', menu=self.ayuda_menu)
+
         self.pantalla_principal.config(menu=self.menu1)
         
     def TablaTokens(self):
@@ -101,7 +107,6 @@ class Interfaz:
         while actual!= None:
             tabla.insert('',END,text=actual.dato.tipo, values=(actual.dato.linea, actual.dato.columna,actual.dato.token, actual.dato.descripcion))
             actual = actual.siguiente
-    
     #/
     
     def analizar(self):
@@ -133,11 +138,14 @@ class Interfaz:
             tkinter.messagebox.showerror('Guardado', 'Ningpun archivo cargado')
 
     def Nuevo(self):
-        texto = self.texto_izquierdo.get(1.0,[END])
-        if texto == None or texto=='':
-            self.texto_izquierdo.delete(1.0,[END])
-        if texto!='':
-            self.GuardarComo()
+        # Si hay un archivo abierto, preguntar si desea guardar los cambios
+        if self.archivo_abierto:
+            if tkinter.messagebox.messagebox.askyesno("Guardar cambios", "¿Desea guardar los cambios antes de abrir un nuevo archivo?"):
+                self.Guardar()
+        
+        # Limpiar el área de edición
+        self.texto_izquierdo.delete('1.0', 'end')
+        self.archivo_abierto = None  # Resetea el nombre del archivo abierto
 
     def Guardar(self):
         text = self.texto_izquierdo.get(1.0,[END])
