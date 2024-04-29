@@ -155,7 +155,7 @@ de como esta funciona.
         Letras = L = [a-z A-Z]* = L*
 
 ## Método del Árbol
-
+![arbl](https://i.ibb.co/VWFP5Fw/arbl.jpg)
 ## Automata Finito
 ![ipc-LFP-automata](https://i.ibb.co/gv94Qk2/ipc-LFP-automata.png)
 
