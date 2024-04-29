@@ -1,2 +1,14 @@
 
 use('temp1');
+
+use('temp');
+
+db.createCollection('literaturas');
+
+db.createCollection('colectemp');
+
+db.colectemp.drop();
+
+db.literaturas.find();
+
+db.literaturas.findOne();

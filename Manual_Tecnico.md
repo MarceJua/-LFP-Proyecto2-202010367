@@ -3,7 +3,7 @@
 ### Primer Semestre 2024
 ```js
 Universidad San Carlos de Guatemala
-Programador: Marcelo André juarez Alfaro
+Programador: Marcelo André Juarez Alfaro
 Carne: 202010367
 Correo: mjuarez2017ig@gmail.com
 ```
@@ -153,6 +153,8 @@ de como esta funciona.
 
         S = Símbolos [comillas, parentesis y llaves]
         Letras = L = [a-z A-Z]* = L*
+
+## Método del Árbol
 
 ## Automata Finito
 ![ipc-LFP-automata](https://i.ibb.co/gv94Qk2/ipc-LFP-automata.png)
